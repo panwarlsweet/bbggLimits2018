@@ -2,7 +2,7 @@
 
 LIMFOLDER=$1/Node_SM
 
-INFILE=${LIMFOLDER}/higgsCombineTest.FitDiagnostics.mH120.123456.root
+INFILE=${LIMFOLDER}/higgsCombineTest.FitDiagnostics.mH120.*.root
 DATAFILE=${LIMFOLDER}/ws_hhbbgg.data_bkg.root
 
 NDIMS=2

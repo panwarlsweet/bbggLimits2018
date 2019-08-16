@@ -1,0 +1,16 @@
+Universe   = vanilla
+Executable = scripts/Analyzer_runjob.sh
+Arguments  = outDir_LIM_node_SM_ttHcut_$(Step) 13
+Log        = output/jobs.cut$(Step).$(ClusterId).log
+Output     = output/jobs.cut$(Step).$(ClusterId).out
+Error      = output/jobs.cut$(Step).$(ClusterId).error
++JobFlavour= "longlunch"
+WhenToTransferOutput  = ON_EXIT_OR_EVICT
+transfer_output_files = ""
+Queue 41 
+#in (21, 22, 23, 24)
+
+#Queue 1 in (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+
+
+### condor_submit condor_job.sub DIR=directory_name ######
