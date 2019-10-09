@@ -5,11 +5,11 @@
 ########################################################################################################################################################
 
 echo '=== Preparing datacards in root format ==='
-
-DIR=$1/Node_SM  
+mass=$1
+DIR=$2/Node_$mass  
 echo $DIR
-opt=$2   ##put no of categroies for which you want to run limits as 2nd arguement
-opt_1=13
+opt=$3   ##put no of categroies for which you want to run limits as 2nd arguement
+opt_1=3
 
 if [ $opt -eq $opt_1 ];then
 
@@ -21,11 +21,11 @@ if [ $opt -eq $opt_1 ];then
 
   printf '\n=== Start fitting for background plots ==\n\n'
 
-  combine -M FitDiagnostics -t -1 -d hhbbgg_13TeV_DataCard.root -S 0  --saveWorkspace --saveShapes --saveNormalization  --saveToys --savePredictionsPerToy -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=100
+  combine -M FitDiagnostics -t -1 -d hhbbgg_13TeV_DataCard.root --freezeParameters allConstrainedNuisances  --saveWorkspace --saveShapes --saveNormalization  --saveToys --savePredictionsPerToy -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=100
 
   printf '\n=====\n\n'
 
-  combine -M AsymptoticLimits -d hhbbgg_13TeV_DataCard.root --run blind -m 125 -n SM_13TeV_3ab -S 0 -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=100&> Limit_stat.txt
+  combine -M AsymptoticLimits -d hhbbgg_13TeV_DataCard.root --run blind -m 125 -n SM_13TeV_3ab --freezeParameters allConstrainedNuisances -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=100&> Limit_stat.txt
 #  combine -M AsymptoticLimits -d hhbbgg_13TeV_DataCard.root --run blind -m 125 -n SM_13TeV_3ab &> Limit.txt
 
   echo '== 3.1) Finished stat only limits'

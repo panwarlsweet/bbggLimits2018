@@ -27,6 +27,8 @@ parser.add_argument('-o', '--outDir', dest="outDir", type=str, default="LIMS_Out
 parser.add_argument('--node', dest="node", default=None, type=str,
                     choices=['2','3','4','5','6','7','8','9','10','11','12','13','SM','box'],
                     help = "Choose the nodes to run")
+parser.add_argument('-sig', '--signal', dest="signal", type=str, default=None,
+                    required=True, help="is it Radion or Graviton?")
 parser.add_argument('--mass', dest="mass", default=None, type=str,
                     choices=['250','260','270','280','300','320','340','350','400','450','500','550','600','650','700', '750', '800', '900'],
                     help = "Choose the resonant mass to run")
@@ -175,7 +177,7 @@ def runFullChain(opt, Params, point=None, NRgridPoint=-1, extraLabel=''):
   if "LT_StrikeBack" in LTDir or "MadMax" in LTDir or "ttH" in LTDir:
       SignalFile = "/LT_output_GluGluToHHTo2B2G_node_"+str(point)+"_13TeV-madgraph.root"
   if isRes:
-    SignalFile = "/LT_output_GluGluToTYPEToHHTo2B2G_M-"+str(point)+"_narrow_13TeV-madgraph.root"
+    SignalFile = "/LT_output_GluGluTo"+str(opt.signal)+"ToHHTo2B2G_M-"+str(point)+"_narrow_13TeV-madgraph.root"
     if "RES_Mar21" in LTDir:
       SignalFile = "/LT_output_GluGluToTYPEToHHTo2B2G_M-"+str(point)+"_narrow_13TeV-madgraph_0.root"
 
@@ -335,7 +337,7 @@ def runFullChain(opt, Params, point=None, NRgridPoint=-1, extraLabel=''):
   # Make datacards:
   myLoc = os.getenv("CMSSW_BASE") + '/src/HiggsAnalysis/bbggLimits2018/'+newFolder
   if isRes==1:
-    DataCardMaker(str(myLoc), NCAT, sigExp, bkgObs, isRes)
+    DataCardMaker_wHiggs(str(myLoc), NCAT, sigExp, bkgObs, higgsExp, mainLog )
   elif addHiggs == 0:
     DataCardMaker(str(myLoc), NCAT, sigExp, bkgObs, isRes)
   else:

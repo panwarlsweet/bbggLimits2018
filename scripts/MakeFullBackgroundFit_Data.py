@@ -21,7 +21,6 @@ def MakeFullBackgroundPdf(bkg_pdf, bkg_norm, hig_pdfs, hig_norms):
 
   argNorms.Print()
   argPdfs.Print()
-
   if argNorms.getSize() != argPdfs.getSize():
     print 'ArgNorms and ArgPdfs have different sizes!'
     return None
@@ -76,7 +75,7 @@ totHiggs = 0
 
 xtitle = ['m_{#gamma#gamma} [GeV]', 'm_{jj} [GeV]']
 ytitle = ['Events/(2 GeV)', 'Events/(5 GeV)']
-Cats = ["HP, 560 GeV < M_{X}", "HP, 478 < M_{X} < 560 GeV",  "HP, 354 < M_{X} < 478 GeV",  "HP, 250 < M_{X} < 354 GeV", "MP, 560 GeV < M_{X}", "MP, 478 < M_{X} < 560 GeV",  "MP, 354 < M_{X} < 478 GeV",  "MP, 250 < M_{X} < 354 GeV", "LP, 560 GeV < M_{X}", "LP, 478 < M_{X} < 560 GeV",  "LP, 354 < M_{X} < 478 GeV",  "LP, 250 < M_{X} < 354 GeV"]
+Cats = ["HP",  "MP",  "LP"]
 
 
 tfile = TFile(opt.dname, "READ")
@@ -84,7 +83,7 @@ tfile = TFile(opt.dname, "READ")
 print "============================== Datafile name ", opt.dataname
 datafile = TFile(opt.dataname, "READ")
 w_all = tfile.Get("w")
-
+#w_all.Print()
 
 icat = opt.category
 
@@ -109,7 +108,8 @@ for iobs,obs in enumerate(dims):
 
 
   w_data = datafile.Get("w_all")
-#  w_data.Print()
+  
+  #w_data.Print()
   ddata="data_obs_cat"+str(icat)
   data2d = w_data.data(ddata)
 #  data2d = tfile.Get("toys/toy_asimov;1")
@@ -138,21 +138,25 @@ for iobs,obs in enumerate(dims):
   bkg_normName = 'n_exp_final_bincat'+str(icat)+'_proc_Bkg'
   bkg_norm = RooRealVar('bkg_norm', 'nonres bkg norm', w_all.obj(bkg_normName).getVal())
 
-  print bkg_pdf_name 
-  bkg_pdf.Print()
+  print "bkg_norm" 
+  bkg_norm.Print()
 
   nBkgParams = bkg_pdf.getParameters(data).getSize()
+  
   print "Number of background parameters:", nBkgParams
   bkg_pdf.getParameters(data).Print("v")
+
   print "Normalisation ", w_all.obj(bkg_normName).getVal() 
 
-  par_name= obs+"_p0amp_cat"+str(icat)+"_CMS_Bkg_cat"+str(icat)
+  #par_name= obs+"_p0amp_cat"+str(icat)+"_CMS_Bkg_cat"+str(icat)
+  par_name="CMS_bkg_"+obs+"_cat"+str(icat)+"_bern"+str(nBkgParams)+"_p0_sq"
+  
   p0amp =  w_data.function(par_name)
-
   func_name="bern_1par_cat"+str(icat)
   ext_func_name="ext_bern_1par_cat"+str(icat)
-
+  print func_name, ext_func_name, p0amp
   bkg_pdf_1par = RooBernstein(func_name,"",var,RooArgList(p0amp));
+  
   ext_bkg_pdf_1par  = RooExtendPdf(ext_func_name, "",  bkg_pdf_1par, bkg_norm);
 
 #  print "name of the parameter = ", par_name

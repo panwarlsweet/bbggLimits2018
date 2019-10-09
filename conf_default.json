@@ -1,7 +1,7 @@
 {
-    "LTDIR" : "/afs/cern.ch/work/l/lata/public/HH_bbyy/merged_2016_n_2017/LT_OutDir_2D_withPU",
+    "LTDIR" : "LT_BulkGraviton_300",
     "RooFitTemplateName" : "templates/models_2D_higgs_mjj70",
-    "ncat" : 12,
+    "ncat" : 3,
     "doDoubleSidedCB": 1,
     "energy" : "13TeV",
     "higgsMass" : 125.0,

@@ -36,6 +36,10 @@ public :
    Bool_t _genDiPhotonFilter;
    Bool_t _ttHTagger;
    Int_t _whichCategorization;
+   Double_t _MX_cut1;
+   Double_t _MX_cut2;
+   TString _mass;
+   TString _signal;
    //Photon ID SF stuff
    TFile* photonidFile;
    TH2F* photonIDhist;
