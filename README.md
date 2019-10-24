@@ -1,6 +1,6 @@
 # How to
 
-* Get latest combine tools ([link](https://cms-hcomb.gitbooks.io/combine/content/part1/#for-end-users-that-dont-need-to-commit-or-do-any-development)):
+* Get latest combine tools ([link](http://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/#setting-up-the-environment-and-installation)):
 ```
 export SCRAM_ARCH=slc7_amd64_gcc700
 cmsrel CMSSW_10_2_13
@@ -26,7 +26,7 @@ scramv1 b
 * Run the limit tree maker like so: (-x = res/nonres; -o = output directry; -c = categorisation; -m = resonant mass points; -MX_1 and -MX_2 =  MX mass window cut; -sig Radion)
 
 ```
-./makeLT.py /afs/cern.ch/work/l/lata/public/ResHHbbgg/2016/root_files_with_ETH_training_noMjj/  -x res -o LT_OutDir_Radion_300 -c 2 -m 300 -MX_1 288 -MX_2 305 -sig Radion
+./makeLT.py /afs/cern.ch/work/l/lata/public/ResHHbbgg/2016/root_files_with_ETH_training_noMjj/  -x res -o LT_OutDir_Radion_300 -c 2 -m 300 -MX_1 288 -MX_2 305 -sig Radion or Radion
 ```
 
 The core code that makes the trees is `bbggLTMaker.C`. It is based on
