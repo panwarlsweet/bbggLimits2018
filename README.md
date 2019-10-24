@@ -56,10 +56,10 @@ as well as *mgg* and *mjj*. Different type of categorizations can be done chosen
 * Run the fits and limits on the produced LTs:
 
 ```
-./runLimit.py -f conf_default.json --mass=300 -o ws_DIR_Name
-sh scripts/Analyzer.sh ws_DIR_Name cat_no     #### it runs the limit from 0 to cat_no. for each categroy put 13 for running combinely
+./runLimit.py -f conf_default.json --mass=300 -o ws_DIR_Name -v 4 -sig Radion
+sh scripts/Analyzer.sh mass_point ws_DIR_Name cat_no     #### it runs the limit from 0 to cat_no. for each categroy put 3 for running combinely
 # example
-sh scripts/Analyzer.sh TEST 13
+sh scripts/Analyzer.sh 300 ws_DIR_Name 3
 sh scripts/MakeSMHHFullBkgPlots.sh TEST #### To get background plots in TEST/Node_SM/Background
 sh scripts/MakeSMHHSignalPlots.sh TEST #### To get signal plots test/Node_SM/SignalShapes
 ```  
