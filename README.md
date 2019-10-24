@@ -23,10 +23,10 @@ scramv1 b
 
 ## Limit trees
 
-* Run the limit tree maker like so: (-x = res/nonres; -o = output directry; -c = categorisation; -m = resonant mass points; -MX_1 and -MX_2 =  MX mass window cut; -sig Radion)
+* Run the limit tree maker like so: (-x = res/nonres; -o = output directry; -c = categorisation; -m = resonant mass points; -MX_1 and -MX_2 =  MX mass window cut; -sig Radion or Bulk Graviton)
 
 ```
-./makeLT.py /afs/cern.ch/work/l/lata/public/ResHHbbgg/2016/root_files_with_ETH_training_noMjj/  -x res -o LT_OutDir_Radion_300 -c 2 -m 300 -MX_1 288 -MX_2 305 -sig Radion or Radion
+./makeLT.py /afs/cern.ch/work/l/lata/public/ResHHbbgg/2016/root_files_with_ETH_training_noMjj/  -x res -o LT_OutDir_Radion_300 -c 2 -m 300 -MX_1 288 -MX_2 305 -sig Radion 
 ```
 
 The core code that makes the trees is `bbggLTMaker.C`. It is based on
