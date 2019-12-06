@@ -23,9 +23,9 @@ rate				      SIG_CAT0	     1		    VBF_CAT0	   BBH_CAT0	  VH_CAT0	 TTH_CAT0	GGH_
 
 ----------------------------------------------------------------------------------------------------------------------------------
 CMS_eff_DiphoTrig       lnN           1.02           -              1.02           1.02           1.02           1.02           1.02
-CMS_eff_PhoID           lnN           1.01           -              1.01           1.01           1.01           1.01           1.01
-CMS_eff_mxCat           lnN           0.995/1.005    -              0.995/1.005    0.995/1.005    0.995/1.005    0.995/1.005    0.995/1.005
-CMS_btag                lnN           1.05           -              1.05           1.05           1.05           1.05           1.05
+CMS_eff_Gamma           lnN           1.02           -              1.02           1.02           1.02           1.02           1.02
+CMS_eff_Jet             lnN           0.984/1.016    -              0.984/1.016    0.984/1.016    0.984/1.016    0.984/1.016    0.984/1.016
+CMS_btag                lnN           1.13           -              1.13           1.13           1.13           1.13           1.13
 QCDscale_tth            lnN           -              -              -              -              -              0.918/1.058    -
 QCDscale_vbf            lnN           -              -              1.021          -              -              -              -
 QCDscale_vh             lnN           -              -              -              -              0.969/1.038    -              -
@@ -34,9 +34,9 @@ pdf                     lnN           -              -              0.997/1.004 
 theory_bbH_scale        lnN           -              -              -              0.76/1.2       -              -              -
 theory_ggHN3LO          lnN           -              -              -              -              -              -              1.039
 
-CMS_hbb_sig_m0_absShift  param  1 0.01
-CMS_hbb_sig_sigmaScale   param  1 0.05
-CMS_hgg_sig_sigmaScale   param  1 0.05
-CMS_hgg_sig_m0_absShift  param  1 0.005
+CMS_hbb_sig_m0_absShift  param  1 0.012
+CMS_hbb_sig_sigmaScale   param  1 0.055
+CMS_hgg_sig_sigmaScale   param  1 0.01
+CMS_hgg_sig_m0_absShift  param  1 0.0003
 
 CMS_bkg_cat0_norm  flatParam
