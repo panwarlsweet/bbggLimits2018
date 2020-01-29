@@ -41,7 +41,7 @@ def Compare(th, exp):
     
 
 outf='KLscanResult_sc.root'
-limdir='KLScans'
+limdir='WS/KLScans'
 
 outfile = TFile(limdir+'/'+outf, 'RECREATE')
 
@@ -53,22 +53,27 @@ for qt in quantiles:
   plots[qt] = TGraphAsymmErrors()
   plots[qt].SetName('plot_'+qt.replace('.', 'p').replace("-", "m"))
 
-scan_kl=[1, 10, 20, 30, 40, 60, 70, 80]
+scan_kl=[1, 5, 10, 15, 17, 19, 20, 25, 30, 35, 36, 40, 41, 42, 44, 46, 47, 49, 50, 51, 53, 55, 57, 59, 60, 65, 70, 71, 72, 74, 80]
+#[1, 5, 10, 20, 30, 40, 60, 70, 80]
 
 myKl = []
 for kl in scan_kl:
     myKl.append(-6+(kl-1)*0.2)
-    with open(limdir+'/KL'+str(kl)+'.txt', 'r') as fp:
+    with open(limdir+'/Limit_stat_'+str(kl)+'.txt', 'r') as fp:
         print kl
         line = fp.readline()
         cnt=-1
         print("Line {}: {}".format(cnt, line.strip()))
-        for qt in quantiles:
+        while line.find("-- AsymptoticLimits ( CLs ) --") < -0.5:
+          line = fp.readline()
+        if line.find("-- AsymptoticLimits ( CLs ) --") > -0.5:
+          for qt in quantiles:
             line = fp.readline()        
             print("Line {}: {}".format(qt, line.strip()))
             array = line.split(" ")
             if line.find("%") > -0.5:
-                lims[qt].append(float(array[len(array)-1]))
+              lims[qt].append(float(array[len(array)-1])*1.05)
+#              lims[qt].append(float(array[len(array)-1]))
 
 
 print myKl
@@ -165,8 +170,8 @@ plots['0.025'].Draw("A3Z")
 plots['0.025'].GetXaxis().SetTitle('#kappa_{#lambda}')
 #plots['0.025'].GetYaxis().SetTitle('95% C.L. limit on #sigma(pp#rightarrowHH)#times#font[52]{B}(HH#rightarrowb#bar{b}#gamma#gamma) [fb]')
 plots['0.025'].GetYaxis().SetTitle('#sigma(pp#rightarrowHH)#times#font[52]{B}(HH#rightarrow#gamma#gammab#bar{b}) [fb]')
-plots['0.025'].SetMaximum(3)
-plots['0.025'].GetXaxis().SetRangeUser(-20, 20)
+plots['0.025'].SetMaximum(4)
+plots['0.025'].GetXaxis().SetRangeUser(-6.5, 10.5)
 SetAxisTextSizes(plots['0.025'])
 c.Update()
 
@@ -226,8 +231,10 @@ c.RedrawAxis()
 
 DrawCMSLabels(c, '136.8')
 
-c.SaveAs(limdir+'/'+outf.replace(".root", ".pdf"))
-c.SaveAs(limdir+'/'+outf.replace(".root", ".png"))
+c.SaveAs(limdir+'/'+outf.replace(".root", "sys.pdf"))
+c.SaveAs(limdir+'/'+outf.replace(".root", "sys.png"))
+#c.SaveAs(limdir+'/'+outf.replace(".root", ".pdf"))
+#c.SaveAs(limdir+'/'+outf.replace(".root", ".png"))
 
 print 'Expected excluded range with kt = 1'
 Compare(nonresXSEC, plots['0.500'])
