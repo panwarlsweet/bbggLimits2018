@@ -72,7 +72,7 @@ RooArgSet* bbgg2DFitter::defineVariables(bool swithToSimpleWeight=false)
   RooRealVar* mgg  = new RooRealVar("mgg","M(#gamma#gamma)",_minMggMassFit,_maxMggMassFit,"GeV");
   RooRealVar* mtot = new RooRealVar("mtot","M(#gamma#gammajj)",200,1600,"GeV");
   RooRealVar* mjj  = new RooRealVar("mjj","M(jj)",_minMjjMassFit,_maxMjjMassFit,"GeV");
-  RooRealVar* ttHTagger  = new RooRealVar("ttHTagger","BDT",-1,1,"");
+  RooRealVar* ttHTagger  = new RooRealVar("ttHTagger","BDT",0,1,"");
   RooCategory* catID = new RooCategory("catID","Event category ID") ;
   RooRealVar* evWeight = 0;
   RooRealVar* new_evWeight = 0;
@@ -729,6 +729,7 @@ RooFitResult* bbgg2DFitter::BkgModelFit()
   function.push_back("Bernstein");
   function.push_back("Exponential");
   function.push_back("PowerLaw");
+  function.push_back("Laurent");
 
   RooExtendPdf* bkgExt;
   double order_mgg=1;
@@ -737,15 +738,25 @@ RooFitResult* bbgg2DFitter::BkgModelFit()
   if (_verbLvl>1) std::cout << "[BkgModelFit] Starting cat loop " << std::endl;
   for (int c = 0; c < _NCAT; ++c) { // to each category
 
-
+    /*
+    // Minimal bias study
     if (c < 2 || c == 3) order_mgg = 1;
     else if (c == 2 || c == 5) order_mgg = 2;
     else order_mgg = 3;
-    
+
     if (c < 2) order_mjj = 1;
     else if (c > 1 && c < 11) order_mjj = 2; // keep cat5 with order 2 to avoid problem of par 1 at boundary. There is no impact on final SM limits: cat5 ber3 : 0.7812 fb; cat5 ber2 : 77.73
     else order_mjj = 3;
+    */
 
+    // FTEST
+    order_mgg = 1;        
+    if (c == 1 || c == 2 || c == 3 || c == 7 || c == 8 || c == 10 ) order_mgg = 2;
+    else if ( c == 6 || c == 11 ) order_mgg = 3;
+  
+    order_mjj = 1;
+    if ( c > 8) order_mjj = 2;
+    else if ( c == 2 ||  c == 6 ) order_mjj = 3;
 
     data[c] = (RooDataSet*) _w->data(TString::Format("Data_cat%d",c));
 
@@ -807,6 +818,9 @@ void bbgg2DFitter::BkgMultiModelFit(std::string fileBaseName)
   RooExtendPdf* BkgPdfExtExp = nullptr;
   RooProdPdf* BkgPdfPow = nullptr;
   RooExtendPdf* BkgPdfExtPow = nullptr;
+  RooProdPdf* BkgPdfLau = nullptr;
+  RooExtendPdf* BkgPdfExtLau = nullptr;
+
   std::vector<string> function;
   //std::vector<string> label;
   RooWorkspace *wBias = new RooWorkspace("w_bias","w_bias");
@@ -817,56 +831,67 @@ void bbgg2DFitter::BkgMultiModelFit(std::string fileBaseName)
   RooAbsPdf* mjjBkgTmpExp = nullptr;
   RooAbsPdf* mggBkgTmpPow = nullptr;
   RooAbsPdf* mjjBkgTmpPow = nullptr;
+  RooAbsPdf* mggBkgTmpLau = nullptr;
+  RooAbsPdf* mjjBkgTmpLau = nullptr;
   
   RooRealVar* mgg = _w->var("mgg");
   RooRealVar* mjj = _w->var("mjj");
   mgg->setRange("BkgFitRange",_minMggMassFit,_maxMggMassFit);
   mjj->setRange("BkgFitRange",_minMjjMassFit,_maxMjjMassFit);
-  PdfModelBuilder pdfsModel;
-  PdfModelBuilder pdfsModel_1;
-  pdfsModel.setObsVar(mgg);
-  pdfsModel_1.setObsVar(mjj);
+  PdfModelBuilder pdfsModel_gg;
+  PdfModelBuilder pdfsModel_jj;
+  pdfsModel_gg.setObsVar(mgg);
+  pdfsModel_jj.setObsVar(mjj);
 
   
-  int order=1, order1=1;
+  int orderB=1, orderE=1, orderP=1, orderL=1;
   /// Add function here
   function.push_back("Bernstein");
   function.push_back("Exponential");
   function.push_back("PowerLaw");
+  function.push_back("Laurent");
+
   // add label for pdf according to function
-  const char *label[3] = {"Ber", "Exp", "Pow"};
+  const char *label[4] = {"Ber", "Exp", "Pow", "Lau"};
 
   if (_verbLvl>1) std::cout << "[BkgMultiPDFModelFit] Starting cat loop " << std::endl;
   //for (unsigned int i = 0; i < function.size() ; i++){
    for (int c = 0; c < _NCAT; ++c) { // to each category
     data[c] = (RooDataSet*) _w->data(TString::Format("Data_cat%d",c));
     wBias->import(*data[c]);
- 
- 
-    order=1;
-    //    if (c == 3 || c == 6 || c == 7 || c == 8 || c == 10 || c == 11) order = 2;
-    //    if (c == 4 || c == 5 || c == 6) order = 2; // bias check
-    //   if (c == 11) order = 3;
-    //  if (c > 3) order=2;
+     // minimal bias
+    /*
     if (c < 2 || c == 3) order = 1;
     else if (c == 2 || c == 5) order = 2;
     else order = 3;
+    */
+    // FTEST
+    orderB = 1;
+    if (c == 1 || c == 3 || c == 7 || c == 8 || c == 10) orderB = 2;
+    else if (c == 6 || c == 11 ) orderB = 3;
     
+    if ( c == 4 || c == 5 || c == 8 || c == 9 || c == 10 ) orderL=2;
+    
+    mggBkgTmpBer = getPdf(pdfsModel_gg,function[0],orderB,TString::Format("bkg_mgg_cat%d",c));
+    mggBkgTmpExp = getPdf(pdfsModel_gg,function[1],orderE,TString::Format("bkg_mgg_cat%d",c));
+    mggBkgTmpPow = getPdf(pdfsModel_gg,function[2],orderP,TString::Format("bkg_mgg_cat%d",c));
+    mggBkgTmpLau = getPdf(pdfsModel_gg,function[3],orderL,TString::Format("bkg_mgg_cat%d",c));
 
-    mggBkgTmpBer = getPdf(pdfsModel,function[0],order,TString::Format("bkg_mgg_cat%d",c));
-    mggBkgTmpExp = getPdf(pdfsModel,function[1],order1,TString::Format("bkg_mgg_cat%d",c));
-    mggBkgTmpPow = getPdf(pdfsModel,function[2],order1,TString::Format("bkg_mgg_cat%d",c));
-    
+    orderB=1;
+    orderL=2;
+    //minimal bias
+    /*
     if (c < 2) order = 1;
     else if (c > 1 && c < 11 && c != 5) order = 2;
     else order = 3;
-    //if (c == 4 || c == 5 || c == 6) order = 2; // bias check
-    //   if (c > 3)   order=2;
-
-    mjjBkgTmpBer = getPdf(pdfsModel_1,function[0],order,TString::Format("bkg_mjj_cat%d",c));
-    mjjBkgTmpExp = getPdf(pdfsModel_1,function[1],order1,TString::Format("bkg_mjj_cat%d",c));
-    mjjBkgTmpPow = getPdf(pdfsModel_1,function[2],order1,TString::Format("bkg_mjj_cat%d",c));
-
+    */
+    // FTEST
+    if (c == 2 || c == 6 || c > 8) orderB = 2;
+    
+    mjjBkgTmpBer = getPdf(pdfsModel_jj,function[0],orderB,TString::Format("bkg_mjj_cat%d",c));
+    mjjBkgTmpExp = getPdf(pdfsModel_jj,function[1],orderE,TString::Format("bkg_mjj_cat%d",c));
+    mjjBkgTmpPow = getPdf(pdfsModel_jj,function[2],orderP,TString::Format("bkg_mjj_cat%d",c));
+    mjjBkgTmpLau = getPdf(pdfsModel_jj,function[3],orderL,TString::Format("bkg_mjj_cat%d",c));
     
      
     RooRealVar norm(TString::Format("roomultipdf_cat%d_norm",c),"Number of background events",0,10000);
@@ -874,24 +899,26 @@ void bbgg2DFitter::BkgMultiModelFit(std::string fileBaseName)
     BkgPdf = new RooProdPdf(TString::Format("pdf_%s_cat%d",label[0],c), "", RooArgList(*mggBkgTmpBer, *mjjBkgTmpBer));
     BkgPdfExp = new RooProdPdf(TString::Format("pdf_%s_cat%d",label[1],c), "", RooArgList(*mggBkgTmpExp, *mjjBkgTmpExp));
     BkgPdfPow = new RooProdPdf(TString::Format("pdf_%s_cat%d",label[2],c), "", RooArgList(*mggBkgTmpPow, *mjjBkgTmpPow));
+    BkgPdfLau = new RooProdPdf(TString::Format("pdf_%s_cat%d",label[3],c), "", RooArgList(*mggBkgTmpLau, *mjjBkgTmpLau));
 
     BkgPdfExt = new RooExtendPdf(TString::Format("ext_pdf_%s_cat%d",label[0],c),"", *BkgPdf,norm);
     BkgPdfExtExp = new RooExtendPdf(TString::Format("ext_pdf_%s_cat%d",label[1],c),"", *BkgPdfExp,norm);
     BkgPdfExtPow = new RooExtendPdf(TString::Format("ext_pdf_%s_cat%d",label[2],c),"", *BkgPdfPow,norm);
+    BkgPdfExtLau = new RooExtendPdf(TString::Format("ext_pdf_%s_cat%d",label[3],c),"", *BkgPdfLau,norm);
 
     if (_verbLvl>1) std::cout << "[BkgMultiPDFModelFit] Fit to Cat " << c << std::endl;
 
       BkgPdfExt->fitTo(*data[c]);
       BkgPdfExtExp->fitTo(*data[c]);
       BkgPdfExtPow->fitTo(*data[c]);
-
+      BkgPdfExtLau->fitTo(*data[c]);
     
     // source https://twiki.cern.ch/twiki/bin/view/CMS/HiggsWG/SWGuideNonStandardCombineUses#Conventional_bias_studies_with_R
        RooArgList mypdfs;
        mypdfs.add(*BkgPdf);
        mypdfs.add(*BkgPdfExp);
        mypdfs.add(*BkgPdfPow);
-   
+       mypdfs.add(*BkgPdfLau);
 
 
     RooCategory category(TString::Format("pdf_index_cat%d",c),"Index of Pdf which is active");

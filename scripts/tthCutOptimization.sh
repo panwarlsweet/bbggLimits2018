@@ -12,8 +12,8 @@ SM
 
 num=0
 max=$1  ###for running while loop
-cut=0.3
-bin=0.02
+cut=-0.05
+bin=0.05
 cat=$2
 CAT=13
 for arg in $nodes:

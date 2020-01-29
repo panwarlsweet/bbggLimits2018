@@ -16,7 +16,7 @@ scramv1 b clean; scramv1 b
 Get this repository code:
 ```
 cd ../
-git clone git@github.com:ResonantHbbHgg/bbggLimits2018.git
+git clone git@github.com:panwarlsweet/bbggLimits2018.git -b ForPAS
 cd bbggLimits2018
 scramv1 b
 ```
@@ -33,7 +33,8 @@ The core code that makes the trees is `bbggLTMaker.C`. It is based on
 [TSelector](https://root.cern.ch/developing-tselector) and does not depend on CMSSW, just
 the ROOT.  
 The goal of this code is to categorize events and make a new tree which *catID* variable,
-as well as *mgg* and *mjj*. Different type of categorizations can be done chosen by option `-c Y`:  
+as well as *mgg* and *mjj*. Different type of categorizations can be done chosen by option `-c Y`
+The recommended option is Y = 2:  
 ```
  Y = 0: 2016 tagger with categorization used in 2016 analysis (4 categories)
  Y = 1: 2017 ETH tagger, using 2016 style categorization (4 categories);
@@ -56,7 +57,12 @@ as well as *mgg* and *mjj*. Different type of categorizations can be done chosen
 * Run the fits and limits on the produced LTs:
 
 ```
-./runLimit.py -f conf_default.json --node=SM -o LIMS_OutDir
+./runLimit.py -f conf_default.json --node=SM -o ws_DIR_Name
+sh scripts/Analyzer.sh ws_DIR_Name cat_no     #### it runs the limit from 0 to cat_no. for each categroy put 13 for running combinely
+# example
+sh scripts/Analyzer.sh TEST 13
+sh scripts/MakeSMHHFullBkgPlots.sh TEST #### To get background plots in TEST/Node_SM/Background
+sh scripts/MakeSMHHSignalPlots.sh TEST #### To get signal plots test/Node_SM/SignalShapes
 ```  
 The process may take a while to complete, especially when running with many categories.  
 The config file `conf_default.json` can be edited to provide needed parameters. Some of them are:  
@@ -81,14 +87,6 @@ the logfile _mainLog_data-time.log[.bbgg2D]_ can be useful
   modifien from _templates/models_2D_higgs_mjj70_cat*.rs_ files and then taken care in
   _src/bbgg2DFitter.cc_
   
-
-
-## The plots 
-
-* Run the following command to do fit diagnostics of combine and make quick plots:
-``` 
-combine -M FitDiagnostics LIMS_OutDir/Node_SM/hhbbgg_13TeV_DataCard.txt --plots --out LIMS_OutDir/
-```  
 Note that you may see many warnings. They are ignored at the moment, but should be fixed in the future.
 
 * non-integer bin entry:  
@@ -101,13 +99,19 @@ These are probably due to the fact that the observed data are taken from MC with
 [WARNING] Found [CMS_hhbbgg_13TeV_mjj_bkg_slope2_cat0] at boundary.
 ```
 
-### Note on plotting
-Previously, the plots were made taking the post-fit results of the Maximum Likelihood fit
-from combine,
-[see here](https://github.com/ResonantHbbHgg/bbggLimits/blob/72ae0c5d502ac4e8554ed0161c7aa345b84f5ec3/scripts/MakeSMHHFullBkgPlots.sh#L11). However,
-this is no longer provided with `FitDiagnostics` option, as also pointed out in
-[this post in HN](https://hypernews.cern.ch/HyperNews/CMS/get/higgs-combination/1223.html). In the same HN post, it's suggested to use 
-`-M MultiDimFit --saveWorkspace` options, which should provide the post-fit PDFs. This should be explored in the future
+## The ttH cut optimization
+
+* Run the following command to optimize ttH cut for all categories/per catgeory (depends on the arg2 in the command), it will generate a plot for limts vs cut if arg=13 (only when you optimize this for all catgegories)
+``` 
+sh scripts/tthCutOptimization.sh arg1 arg2   ## arg1=no. of ttH cuts, arg2= cat_no. use accordingly as explained above
+```  
+
+## Bias study
+
+* RunBias.sh script is for interactely running. For condor jobs use this script condor_job.sub according to this command 
+``` 
+condor_submit condor_job.sub DIR=ws_DIR_Name
+```  
 
 
 

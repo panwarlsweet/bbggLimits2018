@@ -21,8 +21,8 @@ do
     python scripts/MakeFullBackgroundFit_Data.py -i ${INFILE} -d ${DATAFILE} -o ${BKG} -c ${icat} --signalFactor ${FACT} ${FACT} --ndims ${NDIMS} --unblind
 done
 
-for ipurity in {0..2}
-do
-    python scripts/CheckExpoCorrelation.py -d ${DATAFILE} -o ${BKG} -p ${ipurity} --mggmax 150
-    python scripts/CheckExpoCorrelation.py -d ${DATAFILE} -o ${BKG} -p ${ipurity} --mggmax 180
-done
+#for ipurity in {0..2}
+#do
+#    python scripts/CheckExpoCorrelation.py -d ${DATAFILE} -o ${BKG} -p ${ipurity} --mggmax 150
+#    python scripts/CheckExpoCorrelation.py -d ${DATAFILE} -o ${BKG} -p ${ipurity} --mggmax 180
+#done

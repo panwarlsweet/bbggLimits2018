@@ -26,10 +26,12 @@ if [ $opt -eq $opt_1 ];then
   printf '\n=====\n\n'
 
   combine -M AsymptoticLimits -d hhbbgg_13TeV_DataCard.root --run blind -m 125 -n SM_13TeV_3ab -S 0 &> Limit_stat.txt
+#  combine -M AsymptoticLimits -d hhbbgg_13TeV_DataCard.root --run blind -m 125 -n SM_13TeV_3ab &> Limit.txt
 
   echo '== 3.1) Finished stat only limits'
 
   tail  Limit_stat.txt
+#  tail  Limit.txt
 
   cd -
 

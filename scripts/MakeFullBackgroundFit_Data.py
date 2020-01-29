@@ -131,7 +131,9 @@ for iobs,obs in enumerate(dims):
   if not bkg_pdf:
      bkg_pdf_name = "CMS_bkg_"+obs+"_cat"+str(icat)+"_bern2"
      bkg_pdf = w_all.pdf(bkg_pdf_name)
-
+     if not bkg_pdf:
+       bkg_pdf_name = "CMS_bkg_"+obs+"_cat"+str(icat)+"_bern3"
+       bkg_pdf = w_all.pdf(bkg_pdf_name)
 
   bkg_normName = 'n_exp_final_bincat'+str(icat)+'_proc_Bkg'
   bkg_norm = RooRealVar('bkg_norm', 'nonres bkg norm', w_all.obj(bkg_normName).getVal())
