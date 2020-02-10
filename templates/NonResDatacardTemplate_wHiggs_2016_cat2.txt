@@ -25,7 +25,7 @@ rate				      SIG_CAT2	     1		    VBF_CAT2	   BBH_CAT2	  VH_CAT2	 TTH_CAT2	GGH_
 CMS_eff_DiphoTrig	lnN           1.02           -              1.02           1.02           1.02           1.02           1.02
 CMS_eff_Gamma           lnN           1.02           -              1.02           1.02           1.02           1.02           1.02
 CMS_eff_Jet             lnN           0.984/1.016    -              0.984/1.016    0.984/1.016    0.984/1.016    0.984/1.016    0.984/1.016
-CMS_btag                lnN           1.18           -              1.18           1.18           1.18           1.18           1.18
+CMS_btag                lnN           1.0032         -              1.0032         1.0032         1.0032         1.0032         1.0032
 QCDscale_tth            lnN           -              -              -              -              -              0.918/1.058    -
 QCDscale_vbf            lnN           -              -              1.021          -              -              -              -
 QCDscale_vh             lnN           -              -              -              -              0.969/1.038    -              -
