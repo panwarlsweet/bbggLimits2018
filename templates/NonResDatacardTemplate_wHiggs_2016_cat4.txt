@@ -22,17 +22,18 @@ process                               0              1              2           
 rate				      SIG_CAT4	     1		    VBF_CAT4	   BBH_CAT4	  VH_CAT4	 TTH_CAT4	GGH_CAT4
 
 ----------------------------------------------------------------------------------------------------------------------------------
-CMS_eff_DiphoTrig	lnN           1.02           -              1.02           1.02           1.02           1.02           1.02
+CMS_eff_DiphoTrig       lnN           0.998/1.002    -              0.998/1.002    0.998/1.002    0.998/1.002    0.998/1.002    0.998/1.002
 CMS_eff_Gamma           lnN           1.02           -              1.02           1.02           1.02           1.02           1.02
 CMS_eff_Jet             lnN           0.984/1.016    -              0.984/1.016    0.984/1.016    0.984/1.016    0.984/1.016    0.984/1.016
 CMS_btag                lnN           1.0032         -              1.0032         1.0032         1.0032         1.0032         1.0032
-QCDscale_tth            lnN           -              -              -              -              -              0.918/1.058    -
-QCDscale_vbf            lnN           -              -              1.021          -              -              -              -
+QCDscale_tth            lnN           -              -              -              -              -              0.908/1.058    -
+QCDscale_vbf            lnN           -              -              0.997/1.004    -              -              -              -
 QCDscale_vh             lnN           -              -              -              -              0.969/1.038    -              -
 lumi_13TeV              lnN           1.025          -              1.025          1.025          1.025          1.025          1.025
-pdf                     lnN           -              -              0.997/1.004    0.76/1.2	  1.016          1.036          1.032
+pdf                     lnN           1.030          -              1.021      	   1.021          1.025          1.036          1.031
 theory_bbH_scale        lnN           -              -              -              0.76/1.2	  -              -              -
 theory_ggHN3LO          lnN           -              -              -              -              -              -              1.039
+QCDscale_hh             lnN           0.950/1.022    -              -              -              -              -              -
 
 CMS_hbb_sig_m0_absShift  param  1 0.012
 CMS_hbb_sig_sigmaScale   param  1 0.055
