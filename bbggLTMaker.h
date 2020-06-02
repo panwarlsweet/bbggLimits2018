@@ -81,7 +81,9 @@ public :
    Float_t         sigmaMOverMDecorr;
    Float_t         sigmaMJets;
    Float_t         PhoJetMinDr;
-   Float_t         HHbbggMVA;
+//   Float_t         HHbbggMVA;
+   Double_t   	   HHbbggMVA;
+  // Double_t        xmltransfMVA;	
    Float_t         MX;
    Float_t         Mjj;
    Float_t         dijet_pt;
@@ -220,7 +222,8 @@ void bbggLTMaker::Init(TTree *tree)
    //fChain->SetBranchAddress("subleadingJet_DeepCSV", &subleadingJet_DeepCSV, &b_subleadingJet_bDis);
    fChain->SetBranchAddress("MX", &MX, &b_MX);
    fChain->SetBranchAddress("event", &event, &b_event);
-   fChain->SetBranchAddress("HHbbggMVA", &HHbbggMVA, &b_HHbbggMVA);
+//   fChain->SetBranchAddress("HHbbggMVA", &HHbbggMVA, &b_HHbbggMVA);
+   fChain->SetBranchAddress("xmlMVAtransf", &HHbbggMVA, &b_HHbbggMVA);  
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("Mjj", &Mjj, &b_Mjj);
    fChain->SetBranchAddress("CMS_hgg_mass", &CMS_hgg_mass, &b_Mgg);

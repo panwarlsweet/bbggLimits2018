@@ -125,7 +125,7 @@ def MakeSigPlot(data, pdf, var, label, lumi, cat, analysis, doBands, fname, binn
 	xbegin = 0.18
 	ybegin = 0.91
 	Cat = "Dummy"
-        Cats = ["HP, 560 GeV < M_{X}", "HP, 478 < M_{X} < 560 GeV",  "HP, 354 < M_{X} < 478 GeV",  "HP, 250 < M_{X} < 354 GeV", "MP, 560 GeV < M_{X}", "MP, 478 < M_{X} < 560 GeV",  "MP, 354 < M_{X} < 478 GeV",  "MP, 250 < M_{X} < 354 GeV", "LP, 560 GeV < M_{X}", "LP, 478 < M_{X} < 560 GeV",  "LP, 354 < M_{X} < 478 GeV",  "LP, 250 < M_{X} < 354 GeV"]
+        Cats = ["HP", "MP",  "LP"]
 
         Cat = Cats[int(cat)]
 

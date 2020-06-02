@@ -750,13 +750,14 @@ RooFitResult* bbgg2DFitter::BkgModelFit()
     */
 
     // FTEST
-    order_mgg = 1;        
-    if (c == 1 || c == 2 || c == 3 || c == 7 || c == 8 || c == 9 || c == 10 ) order_mgg = 2;
-    else if ( c == 6 || c == 11 ) order_mgg = 3;
+    order_mgg = 1; 
+    if ( c == 1 ) order_mgg = 2; 
+    else if ( c == 2 ) order_mgg = 2;
+    else if (c == 3) order_mgg = 1;
   
     order_mjj = 1;
-    if ( c > 9) order_mjj = 2;
-    else if ( c == 2 ||  c == 6 ) order_mjj = 3;
+    if ( c > 1 && c < 3) order_mjj = 2;
+    else if (c == 3) order_mjj = 1;
 
     data[c] = (RooDataSet*) _w->data(TString::Format("Data_cat%d",c));
 

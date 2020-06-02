@@ -1,5 +1,5 @@
 {
-    "LTDIR" : "LT_BulkGraviton_300",
+    "LTDIR" : "/eos/user/l/lata/Resonant_bbgg/Run2_LT_trees_PR1186/LT_2D_Run2_Radion_650/merged_Radion650",
     "RooFitTemplateName" : "templates/models_2D_higgs_mjj70",
     "ncat" : 3,
     "doDoubleSidedCB": 1,

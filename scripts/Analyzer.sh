@@ -21,11 +21,11 @@ if [ $opt -eq $opt_1 ];then
 
   printf '\n=== Start fitting for background plots ==\n\n'
 
-  combine -M FitDiagnostics -t -1 -d hhbbgg_13TeV_DataCard.root --freezeParameters allConstrainedNuisances  --saveWorkspace --saveShapes --saveNormalization  --saveToys --savePredictionsPerToy -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=100
+  combine -M FitDiagnostics -t -1 -d hhbbgg_13TeV_DataCard.root --freezeParameters allConstrainedNuisances  --saveWorkspace --saveShapes --saveNormalization  --saveToys --savePredictionsPerToy -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=0
 
   printf '\n=====\n\n'
 
-  combine -M AsymptoticLimits -d hhbbgg_13TeV_DataCard.root --run blind -m 125 -n SM_13TeV_3ab --freezeParameters allConstrainedNuisances -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=100&> Limit_stat.txt
+  combine -M AsymptoticLimits -d hhbbgg_13TeV_DataCard.root --run blind -m 125 -n 13TeV_Radion_${mass} --freezeParameters allConstrainedNuisances -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=0&> Limit_stat.txt
 #  combine -M AsymptoticLimits -d hhbbgg_13TeV_DataCard.root --run blind -m 125 -n SM_13TeV_3ab &> Limit.txt
 
   echo '== 3.1) Finished stat only limits'

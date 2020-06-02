@@ -88,7 +88,8 @@ def runFullChain(opt, Params, point=None, NRgridPoint=-1, extraLabel=''):
   else:
     logLvl = logging.DEBUG
 
-  LTDir  = os.getenv("CMSSW_BASE")+'/src/HiggsAnalysis/bbggLimits2018/'+Params['LTDIR']
+  #LTDir  = os.getenv("CMSSW_BASE")+'/src/HiggsAnalysis/bbggLimits2018/'+Params['LTDIR']
+  LTDir  = Params['LTDIR']
   if '/tmp' in Params['LTDIR'] or '/store' in Params['LTDIR'] or '/afs' in Params['LTDIR']:
     LTDir = Params['LTDIR']
     if '/store' in Params['LTDIR']:

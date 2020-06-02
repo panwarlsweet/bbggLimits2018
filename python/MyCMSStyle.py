@@ -76,7 +76,7 @@ def DrawCatLabels(obj, cat):
   stepy = 0.08
 
   labelPrel =   "#it{Work ongoing}"
-  label =   "#bf{pp#rightarrowHH#rightarrow#gamma#gammab#bar{b}}"
+  label =   "#bf{pp#rightarrowX#rightarrowHH#rightarrow#gamma#gammab#bar{b}}"
 
   lat.SetTextFont(43)
 #  lat.DrawLatex(0.14, topy-stepy*2, label)
