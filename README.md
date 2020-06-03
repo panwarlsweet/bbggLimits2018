@@ -28,7 +28,10 @@ scramv1 b
 ```
 ./makeLT.py /afs/cern.ch/work/l/lata/public/ResHHbbgg/2016/root_files_with_ETH_training_noMjj/  -x res -o LT_OutDir_Radion_300 -c 2 -m 300 -MX_1 288 -MX_2 305 -sig Radion 
 ```
-
+* For full run2 limits trees, there is script which will automatically produce all three year LT trees (inculuding bTag norm. factor) and merge them for full Run2 trees for each masss
+```
+sh run1.sh Radion  # make sure you put correct path of working directly and output location
+```
 The core code that makes the trees is `bbggLTMaker.C`. It is based on
 [TSelector](https://root.cern.ch/developing-tselector) and does not depend on CMSSW, just
 the ROOT.  
@@ -37,20 +40,9 @@ as well as *mgg* and *mjj*. Different type of categorizations can be done chosen
 ```
  Y = 0: 2016 tagger with categorization used in 2016 analysis (4 categories)
  Y = 1: 2017 ETH tagger, using 2016 style categorization (4 categories);
- Y = 2: 2017 ETH tagger, with optimized categorization without mjj cut (12 categories);
- Y = 3: 2017 ETH tagger, with optimized categorization and mjj cuts (12 categories);
+ Y = 2: Run2 Res. tagger, with optimized categorization with MX cut(3 MVA categories);
 ```
 
-
-### Notes on limit trees
-* The scale factors for b-tagging are not included in this code. This is because a) the
-  method we used in 2016 is outdated; and b) it requires compilation together with some
-  CMSSW packages which is not trivial in TSelector code. For the reference,
-  [this code](https://github.com/ResonantHbbHgg/bbggLimits/blob/edda480b80455c3d14f644629e5faaa5997cc9f0/src/bbggLTMaker.cc#L278-L340)
-  was used in 2016 to apply the SF for b-tagging.
-* In order to implement another categorization, one has to put it
-  [here](https://github.com/ResonantHbbHgg/bbggLimits2018/blob/f031e57c6e938be983b006fc1f81a01ec53ea61a/bbggLTMaker.C#L268)
-  in _bbggLTMaker_ code, following the structure for already implemented categorizations.
 
 ## Fits and limits
 * Run the fits and limits on the produced LTs:
