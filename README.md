@@ -23,10 +23,10 @@ scramv1 b
 
 ## Limit trees
 
-* Run the limit tree maker like so: (-x = res/nonres; -o = output directry; -c = categorisation; -m = resonant mass points; -MX_1 and -MX_2 =  MX mass window cut; -sig Radion or Bulk Graviton)
+* Run the limit tree maker like so: (-x = res/nonres; -o = output directry; -c = categorisation; -m = resonant mass points; -MX_1 and -MX_2 =  MX mass window cut; -sig Radion or Bulk Graviton; --year =  to pick correct bTag reshape norm. factor and lumi of Run2 year(default is 2016))
 
 ```
-./makeLT.py /afs/cern.ch/work/l/lata/public/ResHHbbgg/2016/root_files_with_ETH_training_noMjj/  -x res -o LT_OutDir_Radion_300 -c 2 -m 300 -MX_1 288 -MX_2 305 -sig Radion 
+./makeLT.py /afs/cern.ch/work/l/lata/public/ResHHbbgg/2016/root_files_with_ETH_training_noMjj/  -x res -o LT_OutDir_Radion_300 -c 2 -m 300 -MX_1 288 -MX_2 305 -sig Radion --year 2016
 ```
 * For full run2 limits trees, there is script which will automatically produce all three year LT trees (inculuding bTag norm. factor) and merge them for full Run2 trees for each masss
 ```
@@ -63,7 +63,7 @@ The config file `conf_default.json` can be edited to provide needed parameters. 
  fitStrategy: 2 - for 2D fit of (mgg, mjj); 1 - for 1D fit of mgg, in which case a cut is set to 100<mjj<150 somewhere in runLimit.py script.
 ```
 
-The results of the limit will be in `LIMS_OutDir/Node_SM/result_1.log`. In case of problems,
+The results of the limit will be in `LIMS_OutDir/Node_SM/Limit.txt`. In case of problems,
 the logfile _mainLog_data-time.log[.bbgg2D]_ can be useful
 
 
