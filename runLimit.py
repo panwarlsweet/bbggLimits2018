@@ -30,7 +30,7 @@ parser.add_argument('--node', dest="node", default=None, type=str,
 parser.add_argument('-sig', '--signal', dest="signal", type=str, default=None,
                     required=True, help="is it Radion or Graviton?")
 parser.add_argument('--mass', dest="mass", default=None, type=str,
-                    choices=['250','260','270','280','300','320','340','350','400','450','500','550','600','650','700', '750', '800', '900'],
+                    choices=['250','260','270','280','300','320','340','350','400','450','500','550','600','650','700', '750', '800', '900', '1000'],
                     help = "Choose the resonant mass to run")
 parser.add_argument('--overwrite', dest="overwrite", action="store_true", default=False,
                     help="Overwrite the results into the same directory")
