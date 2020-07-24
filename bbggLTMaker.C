@@ -9,21 +9,23 @@ const bool DEBUG = 0;
 
 //Radion
 //const Float_t boundary_MVA_2017[4]   = {0.28, 0.5, 0.68, 1.0}; // low mass
-//const Float_t boundary_MVA_2017[4]   = {0.213, 0.392, 0.685, 1.0};// low mass using S/√B
+//const Float_t boundary_MVA_2017[4]   = {0.213, 0.392, 0.685, 1.0};// low mass final using S/√B
 
 //const Float_t boundary_MVA_2017[4]   = {0.26, 0.36, 0.55, 1.0}; // mid mass
 //const Float_t boundary_MVA_2017[4]   = {0.220, 0.410, 0.599, 1.0};// mid mass using S/√B; 0.1, 0.2,0.3
 //const Float_t boundary_MVA_2017[4] = {0.246, 0.464, 0.781, 1.0};// mid mass using signif; signal eff.
-const Float_t boundary_MVA_2017[4] = {0.231, 0.430, 0.680, 1.0}; // RD mid final ; same as low mass boundaries
+//const Float_t boundary_MVA_2017[4] = {0.231, 0.430, 0.680, 1.0}; // RD mid final ; same as low mass boundaries
 
-//const Float_t boundary_MVA_2017[4]   = {0.12, 0.16, 0.25, 1.0}; // high mass
-//const Float_t boundary_MVA_2017[4]   = {0.21,0.372, 0.55, 1.0}; // high RD Run2 using S/√B
+//const Float_t boundary_MVA_2017[4]   = {0.12, 0.16, 0.25, 1.0}; // high mass based of sig eff
+//const Float_t boundary_MVA_2017[4]   = {2.0, 0.15, 0.28, 1.0}; // bases on S/√B 2016 only
+//const Float_t boundary_MVA_2017[4]   = {0.21,0.372, 0.55, 1.0}; // high RD Run2 final using S/√B
 
 //BulkGraviton
 //const Float_t boundary_MVA_2017[4]   = {0.26, 0.5, 0.72, 1.0}; // low mass 
 //const Float_t boundary_MVA_2017[4]   = {0.248, 0.450, 1.0};
 
-
+//NMSSM
+const Float_t boundary_MVA_2017[4]   = {0.18, 0.35, 0.68, 1.0};//low mass 2016
 
 void bbggLTMaker::Begin(TTree * /*tree*/)
 {

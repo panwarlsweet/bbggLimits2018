@@ -59,11 +59,17 @@ if __name__ == "__main__":
       print "Doing signal", opt.signal, opt.mass
 
       fChain = TChain("bbggtrees_13TeV_DoubleHTag_0")
-      fname = opt.indir+"/output_GluGluTo"+str(opt.signal)+"ToHHTo2B2G_M-"+str(opt.mass)+"_narrow_13TeV-madgraph.root"
+      if str(opt.signal) == "Radion" or str(opt.signal) == "BulkGraviton":
+              fname = opt.indir+"/output_GluGluTo"+str(opt.signal)+"ToHHTo2B2G_M-"+str(opt.mass)+"_narrow_13TeV-madgraph.root"
+      else:
+              fname = opt.indir+"/output_"+str(opt.signal)+"_XToYHTo2b2g_MX-"+str(opt.mass)+"_13TeV-madgraph-pythia8.root"
       print fname
       fChain.Add(fname)
       SigbTagNF = 1.0
       match = opt.signal+opt.mass
+      if str(opt.signal) == "Radion" or str(opt.signal) == "BulkGraviton": 
+              SignalNodes = SignalNodes_WED
+      else: SignalNodes = SignalNodes_NMSSM
       for s in SignalNodes:
 	if s[0] == match:
 		SigbTagNF = s[bTagNF]
@@ -79,6 +85,10 @@ if __name__ == "__main__":
       print "Done with signal"
 
       print "Doing Single Higgs samples"
+      if str(opt.signal) == "Radion" or str(opt.signal) == "BulkGraviton": 
+              SMHiggsNodes = SMHiggsNodes_WED
+      else: SMHiggsNodes = SMHiggsNodes_NMSSM
+
       for n in SMHiggsNodes:
         if opt.verb: print n
         fChain = TChain("bbggtrees_13TeV_DoubleHTag_0")

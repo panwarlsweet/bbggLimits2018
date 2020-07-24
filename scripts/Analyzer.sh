@@ -21,7 +21,7 @@ if [ $opt -eq $opt_1 ];then
 
   printf '\n=== Start fitting for background plots ==\n\n'
 
-  combine -M FitDiagnostics -t -1 -d hhbbgg_13TeV_DataCard.root --freezeParameters allConstrainedNuisances  --saveWorkspace --saveShapes --saveNormalization  --saveToys --savePredictionsPerToy -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=0
+  combine -M FitDiagnostics -t -1 -d hhbbgg_13TeV_DataCard.root --freezeParameters allConstrainedNuisances  --saveWorkspace --saveShapes --saveNormalization  --saveToys --savePredictionsPerToy -s -1 --X-rtd TMCSO_AdaptivePseudoAsimov=0 -m 125
 
   printf '\n=====\n\n'
 

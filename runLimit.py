@@ -178,7 +178,10 @@ def runFullChain(opt, Params, point=None, NRgridPoint=-1, extraLabel=''):
   if "LT_StrikeBack" in LTDir or "MadMax" in LTDir or "ttH" in LTDir:
       SignalFile = "/LT_output_GluGluToHHTo2B2G_node_"+str(point)+"_13TeV-madgraph.root"
   if isRes:
-    SignalFile = "/LT_output_GluGluTo"+str(opt.signal)+"ToHHTo2B2G_M-"+str(point)+"_narrow_13TeV-madgraph.root"
+    if str(opt.signal)=="Radion" or str(opt.signal)=="BulkGraviton":
+      SignalFile = "/LT_output_GluGluTo"+str(opt.signal)+"ToHHTo2B2G_M-"+str(point)+"_narrow_13TeV-madgraph.root"
+    else:
+      SignalFile = "/LT_output_"+str(opt.signal)+"_XToYHTo2b2g_MX-"+str(opt.mass)+"_13TeV-madgraph-pythia8.root"
     if "RES_Mar21" in LTDir:
       SignalFile = "/LT_output_GluGluToTYPEToHHTo2B2G_M-"+str(point)+"_narrow_13TeV-madgraph_0.root"
 

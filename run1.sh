@@ -7,9 +7,9 @@ mass=(260 270 280 300 350 400 450 500 550 600 650 700 800 900 1000)
 MX_cut1=(255 265 275 291 337 374 418 464 510 555 615 655 745 835 925)
 MX_cut2=(263 275 286 309 360 413 463 514 565 615 680 725 825 925 1025)
 ##Input directory with samples
-indir16="/eos/user/l/lata/Resonant_bbgg/flattening_highmass_"${signal}"2016_fixedbtag/analysistrees/"
-indir17="/eos/user/l/lata/Resonant_bbgg/flattening_highmass_"${signal}"2017_fixedbtag/analysistrees/"
-indir18="/eos/user/l/lata/Resonant_bbgg/flattening_highmass_"${signal}"2018_fixedbtag/analysistrees/"
+indir16="/eos/user/l/lata/Resonant_bbgg/flattening_highmass_"${signal}"2016_fixedbtag/analysistrees_ttHVar/"
+indir17="/eos/user/l/lata/Resonant_bbgg/flattening_highmass_"${signal}"2017_fixedbtag/analysistrees_ttHVar/"
+indir18="/eos/user/l/lata/Resonant_bbgg/flattening_highmass_"${signal}"2018_fixedbtag/analysistrees_ttHVar/"
 
 ##Output directory with Limit Tree (LT) for 1D
 #path=.
@@ -18,7 +18,7 @@ indir18="/eos/user/l/lata/Resonant_bbgg/flattening_highmass_"${signal}"2018_fixe
 ##Output directory with Limit Tree (LT) for 2D
 for imass in {11..14}
 do
-   path="/eos/user/l/lata/Resonant_bbgg/Run2_LT_trees_PR1186"
+   path="/eos/user/l/lata/Resonant_bbgg/Run2_LT_trees_PR1186_ttHVar"
    LT=LT_2D_Run2_${signal}_${mass[${imass}]}
 
    out="$path/$LT"
@@ -40,7 +40,7 @@ do
 #   echo "./makeLT.py" $indir16 "-x res -l 35.9 -o" $outdir16 "-c 2 -m "${mass[${imass}]} "-MX_1" ${MX_cut1[${imass}]} "-MX_2 "${MX_cut2[${imass}]} "-sig "${signal} "--year 2016"
    ./makeLT.py  $indir16 -x res -o $outdir16 -c 2 -m ${mass[${imass}]} -MX_1 ${MX_cut1[${imass}]} -MX_2 ${MX_cut2[${imass}]} -sig ${signal} --year 2016
    ./makeLT.py  $indir17 -x res -o $outdir17 -c 2 -m ${mass[${imass}]} -MX_1 ${MX_cut1[${imass}]} -MX_2 ${MX_cut2[${imass}]} -sig ${signal} --year 2017
-   ./makeLT.py  $indir18 -x res -o $outdir18 -c 2 -m ${mass[${imass}]} -MX_1 ${MX_cut1[${imass}]} -MX_2 ${MX_cut2[${imass}]} -sig ${signal} --year 2018
+   ./makeLT.py  $indir18 -x res -o $outdir18 -c 2 -m ${mass[${imass}]} -MX_1 ${MX_cut1[${imass}]} -MX_2 ${MX_cut2[${imass}]} -sig ${signal} --year 2018 
    echo "Finish makeLT ..."
 
    execute_cmd=hadd

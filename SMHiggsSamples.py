@@ -4,7 +4,7 @@ genDiPhoFilterFactor = 1./(1 - 0.06)
 #factor comes from the fact that pythia includes H->gamma*gamma->llgamma, while branching fraction from YR4  does not
 #for more info, see: https://indico.cern.ch/event/598436/contributions/2529023/attachments/1434414/2205057/Zenz-News-Hgg-27Mar-v2.pdf
 # below the list contains bTagNF yearwise for all SignalH sample
-SMHiggsNodes = [
+SMHiggsNodes_WED = [
     ['output_GluGluHToGG_M-125_13TeV_powheg_pythia8.root', 1.0505, 1.0881, 1.053],
     ['output_VBFHToGG_M-125_13TeV_powheg_pythia8.root', 1.0468, 1.069, 1.0398],
     ['output_VHToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8.root', 1.0495, 1.071, 1.0497],
@@ -12,7 +12,17 @@ SMHiggsNodes = [
     ['output_bbHToGG_M-125_4FS_yb2_13TeV_amcatnlo.root', 1.0587, 1.0631, 1.0419],
     ['output_bbHToGG_M-125_4FS_ybyt_13TeV_amcatnlo.root', 1.0326, 1.0352, 1.0277]
 ]
-SignalNodes = [
+
+SMHiggsNodes_NMSSM = [
+    ['output_GluGluHToGG_M-125_13TeV_powheg_pythia8.root', 1.0067, 1.0881, 1.053],
+    ['output_VBFHToGG_M-125_13TeV_powheg_pythia8.root', 1.0031, 1.069, 1.0398],
+    ['output_VHToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8.root', 0.9999, 1.071, 1.0497],
+    ['output_ttHToGG_M125_13TeV_powheg_pythia8.root', 1.0121, 1.0553, 1.0241],
+    ['output_bbHToGG_M-125_4FS_yb2_13TeV_amcatnlo.root', 1.0092, 1.0631, 1.0419],
+    ['output_bbHToGG_M-125_4FS_ybyt_13TeV_amcatnlo.root', 1.0029, 1.0352, 1.0277]
+]
+
+SignalNodes_WED = [
     ['Radion260', 1.0652, 1.1089, 1.0887],
     ['Radion270', 1.0628, 1.1058, 1.0865],
     ['Radion280', 1.0637, 1.1043, 1.0845],
@@ -29,4 +39,15 @@ SignalNodes = [
     ['Radion800', 1.0368, 1.0563, 1.0421],
     ['Radion900', 1.0371, 1.0510, 1.0399],
     ['Radion1000',1.0071, 1.0502, 1.0368]
+]
+
+SignalNodes_NMSSM = [
+    ['NMSSM300'  ,1.0110],
+    ['NMSSM400'  ,1.0112],
+    ['NMSSM500'  ,1.0122],
+    ['NMSSM600'  ,1.0132],
+    ['NMSSM700'  ,1.0142],
+    ['NMSSM800'  ,1.0150],
+    ['NMSSM900'  ,1.0153],
+    ['NMSSM1000' ,1.0156]
 ]
